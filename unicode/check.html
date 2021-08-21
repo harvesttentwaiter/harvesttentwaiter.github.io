@@ -346,6 +346,23 @@ function mkCheck() {
 <body onload="makeTable()">
 <p>Unicode Check
 
+<p>This uses javascript to render the page from a small amount of HTML
+and code. There are about 300-ish unicode ranges as of August 2021.
+This tries to render them and has a sample image to compare. Note,
+there can be signficant font variations in how the character appears.
+
+<p>Some ranges start with non-printable characters, so the range is
+shifted to a printable row. In that case, the link to the official
+unicode chart will be broken, and the name of the range has the real
+starting hex code point prepended.
+
+<p>As noted in the <a href=https://en.wikipedia.org/wiki/Tags_(Unicode_block)>
+wikipedia page about unicode tags</a>, there are various recommendations
+and common code point usage. It's not really needed to be able to render
+ancient characters and scripts. Those who need those writing systems
+will likely need more verification and control than web systems that 
+could silently revise, upgrade, and change.
+
 <div id=unicode>placeholder</div>
 
 <p>
