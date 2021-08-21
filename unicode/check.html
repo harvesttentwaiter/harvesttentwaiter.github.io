@@ -30,7 +30,7 @@ var ranges = {
 0x0A00:"Gurmukhi",
 0x0A80:"Gujarati",
 0x0B00:"Oriya (Odia)",
-0x0B80:"Tamil",
+0x0B90:"b80 Tamil",
 0x0C00:"Telugu",
 0x0C80:"Kannada",
 0x0D00:"Malayalam",
@@ -75,8 +75,7 @@ var ranges = {
 0x1DC0:"Combining Diacritical Marks Supplement",
 0x1E00:"Latin Extended Additional",
 0x1F00:"Greek Extended",
-0x2000:"General Punctuation",
-0x2000:"Layout Controls",
+0x2010:"2000 General Punctuation",
 0x2070:"Super and Subscripts",
 0x2070:"Superscripts and Subscripts",
 0x20A0:"Currency Symbols",
@@ -119,7 +118,7 @@ var ranges = {
 0x3000:"CJK Symbols and Punctuation",
 0x3040:"Hiragana",
 0x30A0:"Katakana",
-0x3100:"Bopomofo",
+0x3110:"3100 Bopomofo",
 0x3130:"Hangul Compatibility Jamo",
 0x3190:"Kanbun",
 0x31A0:"Bopomofo Extended",
@@ -158,14 +157,11 @@ var ranges = {
 0xABC0:"Meetei Mayek",
 0xAC00:"Hangul Syllables",
 0xD7B0:"Hangul Jamo Extended-B",
-0xE000:"Private Use Area",
 0xF900:"CJK Compatibility Ideographs",
 0xFB00:"Alphabetic Presentation Forms",
 0xFB00:"Latin Ligatures",
 0xFB50:"Arabic Presentation Forms-A",
 0xFB50:"Rial Sign",
-0xFDD0:"Range in Arabic Presentation Forms-A",
-0xFE00:"Variation Selectors",
 0xFE10:"Vertical Forms",
 0xFE20:"Combining Half Marks",
 0xFE30:"CJK Compatibility Forms",
@@ -175,7 +171,6 @@ var ranges = {
 0xFF00:"Halfwidth and Fullwidth Forms",
 0xFF10:"Fullwidth ASCII Digits",
 0xFFA0:"Halfwidth Jamo",
-0xFFF0:"Specials",
 0x10000:"Linear B Syllabary",
 0x10080:"Linear B Ideograms",
 0x10100:"Aegean Numbers",
@@ -317,10 +312,8 @@ var ranges = {
 0x2CEB0:"CJK Extension&nbsp;F",
 0x2F800:"CJK Compatibility Ideographs Supplement",
 0x30000:"CJK Extension&nbsp;G",
-0xE0000:"Tags",
-0xE0100:"Variation Selectors Supplement",
-0xF0000:"Supplementary Private Use Area-A",
-0x100000:"Supplementary Private Use Area-B",
+// 0xE0020:"e0000 Tags", // https://en.wikipedia.org/wiki/Tags_(Unicode_block)
+// 0xE0100:"Variation Selectors Supplement",
 };
 function makeTable() {
 	var codePt = 0;
@@ -334,11 +327,16 @@ function mkCheck() {
 		var k = parseInt(k0.toString(16));
 		var nom = ranges[k0];
 		var codePtHexStr = k.toString(16);
+		var padUpper = codePtHexStr.toUpperCase();
+		if (padUpper.length < 4) {
+			padUpper = "0"+padUpper;
+		}
 		out += "<tr><td>0x"+codePtHexStr;
 		out += "</td><td><img src=u"+codePtHexStr+".png>";
 		out += "</td><td>&#x"+codePtHexStr;
 		out += ";</td><td>&#x"+(k+1).toString(16);
-		out += ";</td><td>"+nom;
+		out += ";</td><td><a href=https://www.unicode.org/charts/PDF/U"+padUpper+".pdf>chart</a>";
+		out += "</td><td>"+nom;
 		out += "</td></tr>\n";
 	}
 	return out+"</table>";
@@ -350,9 +348,8 @@ function mkCheck() {
 
 <div id=unicode>placeholder</div>
 
-<p>I think this information is basic fact and cannot be copyrighted. I
-put this page's code in public domain. This information enables 
-interoperability
-which may be fair use.
+<p>
+I put this page's code in public domain. This information enables 
+interoperability which may be fair use.
 </body>
 </html>
